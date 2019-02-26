@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang = "en" dir="ltr">
+    <head>
+        <title> Task 1.1 </title>
+        <style>
+            .error{
+                color:red;
+            }
+            textarea{
+                width: 300px;
+                height: 300px;
+            }
+        </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var request;
+        $(document).ready(function(){
+            $("#Form").submit(function(event){
+                event.preventDefault();
+
+                var form = $(this);
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/Task1_1.php",
+                    data: form.serialize(),
+                    success: function(result){
+                        $("#returnField").html(result);
+                    }
+                });
+            });
+        });
+
+
+    </script>
+    </head>
+    <body>
+        <form id="Form" method="POST">
+            Search Query: <input type="text" name="query"><br>
+            Result Format: <br>
+            <input type="radio" name="format" value="JSON">JSON<br>
+            <input type="radio" name="format" value="CSV">CSV<br>
+            <input type="radio" name="format" value="XML">XML<br>
+            <input type="radio" name="format" value="TABLE">TABLE<br>
+            <input type="submit" value="Submit"><br>
+        </form>
+        <div id="returnField"></div>
+    </body>
+</html>
+
