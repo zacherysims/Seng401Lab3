@@ -39,6 +39,7 @@ $(document).ready( function(){
                 document.getElementById("result").innerHTML = "one of you're points do not fall within valid long/lat bounds";
             }
 
+
             document.getElementById("submit").disabled = true;
         }
     });
