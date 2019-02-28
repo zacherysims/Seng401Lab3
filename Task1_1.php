@@ -17,32 +17,38 @@ if($conn && (isset($_POST['query']) || isset($_POST['selection'])) && isset($_PO
     $searchQuery = $_POST['query'];
     $format = $_POST['format'];
     $selection = $_POST['selection'];
-    $Schools = array("Francophone" => 0, "Post Secondary" => 0, "Charter" => 0, "Separate School" => 0, "Private School" => 0, "Public School" => 0, );
     if($selection != ""){
 
-        $queryStatement= "SELECT FROM CalgarySchools WHERE sector= " .  "'" . $selection . "'";
+        $queryStatement= "SELECT * FROM CalgarySchools WHERE sector= " .  "'" . $selection . "'";
         $query = $conn->query($queryStatement);
         $results = $query->fetchAll();
         if($format == "CSV"){
+            $Schools = array('Francophone' => 0, 'Post Secondary' => 0, 'Charter' => 0, 'Separate School' => 0, 'Private School' => 0, 'Public School' => 0, );
             foreach($results as $result){
-                echo $result['type'];
-                $Schools["'" . $result['type'] . "'"] ++;
+                $Schools[$result['type']] ++;
             }
             foreach($Schools as $school => $value)
             {
-                echo "There are " . $value . " schools that are a " . $school . '<br>';
+                echo $value . ", " . $school . '<br>';
             }
         }
     
         if($format == "JSON"){
-            foreach($results as $result)
-            {
-                $json = json_encode($result);
-                echo $json . "<br>";
+            $Schools = array('Francophone' => 0, 'Post Secondary' => 0, 'Charter' => 0, 'Separate School' => 0, 'Private School' => 0, 'Public School' => 0, );
+            foreach($results as $result){
+                $Schools[$result['type']] ++;
             }
+            $json = json_encode($Schools);
+            echo $json;
+
         }
     
         if($format == "XML"){
+            $Schools = array('Francophone' => 0, 'Post Secondary' => 0, 'Charter' => 0, 'Separate School' => 0, 'Private School' => 0, 'Public School' => 0, );           
+            foreach($results as $result){
+                $Schools[$result['type']] ++;
+            }
+
             function to_xml(SimpleXMLElement $object, array $data)
             {   
                 foreach ($data as $key => $value) {
@@ -59,25 +65,27 @@ if($conn && (isset($_POST['query']) || isset($_POST['selection'])) && isset($_PO
                     }   
                 }   
             } 
-    
-            foreach($results as $result){
                 $xml = new SimpleXMLElement('<root/>');
-                to_xml($xml, $result);
+                to_xml($xml, $Schools);
                 print_r($xml);
                 echo '<br>';
-            }
         }
     
         if($format == "TABLE"){
             echo '<table>';
-            echo '<tr><th>Name</th><th>Address</th><th>Postal Code</th></tr>';
-            foreach($results as $result)
+            echo '<tr><th>Type</th><th>Number</th></tr>';
+            $Schools = array('Francophone' => 0, 'Post Secondary' => 0, 'Charter' => 0, 'Separate School' => 0, 'Private School' => 0, 'Public School' => 0, );           
+            foreach($results as $result){
+                $Schools[$result['type']] ++;
+            }
+            foreach($Schools as $school => $value)
             {
-                echo '<tr><td>' . $result['name']  . '</td><td>' . $result['address'] . '</td><td>' . $result['postalcode'] . '</td></tr>';
+                echo '<tr><td>' . $school  . '</td><td>' . $value . '</td></tr>';
     
             }
         }
     }
+    else{
     $queryStatement = "SELECT * FROM CalgarySchools WHERE name LIKE '%"  . $searchQuery . "%'";
     $query = $conn->query($queryStatement);
     $results = $query->fetchAll();
@@ -85,7 +93,7 @@ if($conn && (isset($_POST['query']) || isset($_POST['selection'])) && isset($_PO
     if($format == "CSV"){
         foreach($results as $result)
         {
-            echo $result['name'] . ", " . $result['address'] . $result['type'] . ", " . $result['postalcode'] . "<br>";
+            echo $result['name'] . ", " . $result['address'] . ", " . $result['postalcode'] . "<br>";
         }
     }
 
@@ -132,6 +140,7 @@ if($conn && (isset($_POST['query']) || isset($_POST['selection'])) && isset($_PO
 
         }
     }
+}
 }
 }catch (PDOException $e){
     echo "<br>";
