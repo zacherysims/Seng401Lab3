@@ -42,9 +42,16 @@
             <input type="radio" name="format" value="CSV">CSV<br>
             <input type="radio" name="format" value="XML">XML<br>
             <input type="radio" name="format" value="TABLE">TABLE<br>
+            <div>Or select a quadrant of the city <br> (Overrides Search)</div>
+            <select name="selection">
+                <option value=""></option>
+                <option value="NW">NW</option>
+                <option value="NE">NE</option>
+                <option value="SE">SE</option>
+                <option value="SW">SW</option>
+            </select>
             <input type="submit" value="Submit"><br>
         </form>
         <div id="returnField"></div>
     </body>
 </html>
-
