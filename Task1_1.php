@@ -73,7 +73,7 @@ if($conn && (isset($_POST['query']) || isset($_POST['selection'])) && isset($_PO
             echo '<tr><th>Name</th><th>Address</th><th>Postal Code</th></tr>';
             foreach($results as $result)
             {
-                echo '<tr><td>' . $result['name'] . '</td><td>' . $result['address'] . '</td><td>' . $result['postalcode'] . '</td></tr>';
+                echo '<tr><td>' . $result['name']  . '</td><td>' . $result['address'] . '</td><td>' . $result['postalcode'] . '</td></tr>';
     
             }
         }
@@ -85,7 +85,7 @@ if($conn && (isset($_POST['query']) || isset($_POST['selection'])) && isset($_PO
     if($format == "CSV"){
         foreach($results as $result)
         {
-            echo $result['name'] . ", " . $result['address'] . ", " . $result['postalcode'] . "<br>";
+            echo $result['name'] . ", " . $result['address'] . $result['type'] . ", " . $result['postalcode'] . "<br>";
         }
     }
 
