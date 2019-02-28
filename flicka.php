@@ -1,10 +1,15 @@
-
 <?php
+
+$blat = $_POST['blat'];
+$blong = $_POST['blong'];
+$tlat = $_POST['tlat'];
+$tlong = $_POST['tlong'];
+
 $params = array(
     //secret id: d06e0e5f654d7f64
     'api_key' => '07e8e68cad54141ad2fbc3f918c94797',
     'method' => 'flickr.photos.search',
-    'bbox' => '-114,50,-113,51',
+    'bbox' => ''.$blong.','.$blat.','.$tlong.','.$tlat.'',
     'extras' => 'geo',
     'has_geo' => '1',
     'per_page' => '10',
@@ -35,9 +40,4 @@ var_dump($rsp2);
 
 echo '</pre>';
 
-
-$photos = $rsp2['photos']['photo'];
-$imgsrc = 'https://farm'.$photos[0]["farm"].'.staticflickr.com/'.
-$photos[0]["server"] . '/'.$photos[0]["id"].'_'.$photos[0]["secret"].'.jpg';
-echo '<img src="'.$imgsrc.'">';
 ?>
