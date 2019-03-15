@@ -39,5 +39,11 @@ echo '</pre>';
 $photos = $rsp2['photos']['photo'];
 $imgsrc = 'https://farm'.$photos[0]["farm"].'.staticflickr.com/'.
 $photos[0]["server"] . '/'.$photos[0]["id"].'_'.$photos[0]["secret"].'.jpg';
-echo '<img src="'.$imgsrc.'">';
+echo '<img src="'.$imgsrc.'"><br>';
+
+$imgsrc = 'https://farm'.$photos[1]["farm"].'.staticflickr.com/'.
+$photos[1]["server"] . '/'.$photos[1]["id"].'_'.$photos[1]["secret"].'.jpg';
+
+echo '<img src ="'.$imgsrc.'"><br>';
+
 ?>
