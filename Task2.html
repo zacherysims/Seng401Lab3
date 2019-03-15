@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task II</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="functions.js"></script>   
+</head>
+<body>
+
+
+
+
+<form id ="form" method = "POST">
+  Bottom Left Corner:<br>
+    Longitude:<input type="number" name="blongitude" id="blongitude"  value="" required>
+  <br>
+    Lattitude:<input type="number" name="blattitude" id="blattitude" value="" required>
+  <br>
+  <br>
+  Top Right Corner:<br>
+    Longitude:<input type="number" name="tlongitude" id="tlongitude" value="" required>
+  <br>
+    Lattitude:<input type="number" name="tlattitude" id="tlattitude" value="" required>
+  <br>
+
+  <input type="submit" id="submit" value="Submit">
+</form> 
+
+<button id="toggle" onclick="Toggle()">Toggle Output</button>
+<div id="result">
+    <div id="json" style ="display: none">
+
+    </div>
+    <div id="images">
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
